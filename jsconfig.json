@@ -4,16 +4,23 @@
     "module": "esnext",
     "baseUrl": "./",
     "moduleResolution": "node",
+    "jsx":"preserve",
     "paths": {
       "@/*": [
         "src/*"
       ]
     },
+
     "lib": [
       "esnext",
       "dom",
       "dom.iterable",
-      "scripthost"
+      "scripthost",
     ]
-  }
+  },
+
+  "exclude":[
+    "node_modules",
+    "dist",
+  ],
 }
