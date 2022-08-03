@@ -8,8 +8,10 @@
                     <p>尚品汇欢迎您！</p>
                     <p>
                         <span>请</span>
-                        <a href="###">登录</a>
-                        <a href="###" class="register">免费注册</a>
+                        <router-link to="/login">登录</router-link>
+                        <!-- <a href="###">登录</a> -->
+                        <router-link to="/register" class="register">免费注册</router-link>
+                        <!-- <a href="###" class="register">免费注册</a> -->
                     </p>
                 </div>
                 <div class="typeList">
@@ -27,14 +29,14 @@
         <!--头部第二行 搜索区域-->
         <div class="bottom">
             <h1 class="logoArea">
-                <a class="logo" title="尚品汇" href="###" target="_blank">
+                <router-link to="/home" class="logo" title="尚品汇" href="###">
                     <img src="../assets/logo.png" alt="">
-                </a>
+                </router-link>
             </h1>
             <div class="searchArea">
                 <form action="###" class="searchForm">
-                    <input type="text" id="autocomplete" class="input-error input-xxlarge" />
-                    <button class="sui-btn btn-xlarge btn-danger" type="button">搜索</button>
+                    <input type="text" id="autocomplete" class="input-error input-xxlarge" v-model="keyword"/>
+                    <button class="sui-btn btn-xlarge btn-danger" type="button" @click="goSearch">搜索</button>
                 </form>
             </div>
         </div>
@@ -44,6 +46,32 @@
 <script>
 export default {
     name: "headerC",
+    data(){
+        return{
+            keyword:""
+        }
+    },
+    methods:{
+        goSearch(){
+            // 编程式导航路由
+            // 此处多次点击会报错
+            // 传递params参数和query参数  (params需要在路由path中接收)
+            // this.$router.push("/search/"+this.keyword+"?k="+this.keyword.toUpperCase());
+
+            // 对象传参方式
+            this.$router.push({
+                // 需在路由中配置name属性，使用path不能和params一起使用
+                name:"search",
+                params:{keyword:this.keyword},
+
+                // params传递空字符串是 使用undefined 避免url错误
+                // params:{keyword:""||undefined},
+                query:{
+                    k:this.keyword.toUpperCase()
+                }
+            })
+        }
+    }
 }
 </script>
 

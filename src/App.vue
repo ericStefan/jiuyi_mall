@@ -1,23 +1,23 @@
 <template>
   <div id="app">
     <HeaderC></HeaderC>
-    <FooterC></FooterC>
+    <router-view></router-view>
+    <FooterC v-show="this.$route.meta.show"></FooterC>
   </div>
 </template>
 
 <script>
-import HeaderC from './components/HeaderC.vue'
-import FooterC from './components/FooterC/FooterC.vue'
+import HeaderC from './components/HeaderC'
+import FooterC from './components/FooterC'
 
 export default {
   name: 'App',
   components: {
     HeaderC,
-    FooterC
+    FooterC,
 }
 }
 </script>
 
-<style lang="less">
-
+<style lang="css">
 </style>
