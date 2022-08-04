@@ -13,7 +13,7 @@
                             <h3 @mouseenter="changeIndex(index)">
                                 <a href="">{{ c1.categoryName }}</a>
                             </h3>
-                            <div class="item-list clearfix" v-for="(c2, index) in c1.categoryChild"
+                            <div class="item-list clearfix"   v-for="(c2, index) in c1.categoryChild" :style="{display:currentIndex==index?'block':'none'}"
                                 :key="c2.categoryId">
                                 <div class="subitem">
                                     <dl class="fore">
@@ -51,6 +51,8 @@
 // 全局组件 TypeNav
 
 import { mapState } from 'vuex';
+// 引入loadsh节流函数
+import throttle from "lodash/throttle";
 
 export default {
     name: "TypeNav",
@@ -75,9 +77,10 @@ export default {
 
     methods: {
         // 通过动态添加类名改变样式
-        changeIndex(index) {
+        // 添加节流
+        changeIndex:throttle(function(index) {
             this.currentIndex = index;
-        },
+        },100),
         leaveIndex() {
             this.currentIndex = -1;
         }
@@ -142,7 +145,7 @@ export default {
                     }
 
                     .item-list {
-                        display: none;
+                        // display: none;
                         position: absolute;
                         width: 734px;
                         min-height: 460px;
@@ -197,7 +200,7 @@ export default {
 
                     &:hover {
                         .item-list {
-                            display: block;
+                            // display: block;
                         }
                     }
                 }

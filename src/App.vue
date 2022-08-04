@@ -15,6 +15,10 @@ export default {
   components: {
     HeaderC,
     FooterC,
+},
+data(){
+  return {
+  }
 }
 }
 </script>
