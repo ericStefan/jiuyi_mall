@@ -1,8 +1,7 @@
 <template>
   <div>
-    这是search
-    ----params：{{this.$route.params.keyword}}
-    ----query:{{this.$route.query.k}}
+    <!-- 这是search模块 -->
+    <TypeNav></TypeNav>
   </div>
 </template>
 

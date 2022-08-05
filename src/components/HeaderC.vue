@@ -15,14 +15,14 @@
                     </p>
                 </div>
                 <div class="typeList">
-                    <a href="###">我的订单</a>
-                    <a href="###">我的购物车</a>
-                    <a href="###">我的尚品汇</a>
-                    <a href="###">尚品汇会员</a>
-                    <a href="###">企业采购</a>
-                    <a href="###">关注尚品汇</a>
-                    <a href="###">合作招商</a>
-                    <a href="###">商家后台</a>
+                    <a href="#">我的订单</a>
+                    <a href="#">我的购物车</a>
+                    <a href="#">我的尚品汇</a>
+                    <a href="#">尚品汇会员</a>
+                    <a href="#">企业采购</a>
+                    <a href="#">关注尚品汇</a>
+                    <a href="#">合作招商</a>
+                    <a href="#">商家后台</a>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
             </h1>
             <div class="searchArea">
                 <form action="###" class="searchForm">
-                    <input type="text" id="autocomplete" class="input-error input-xxlarge" v-model="keyword"/>
+                    <input type="text" id="autocomplete" class="input-error input-xxlarge" v-model="keyword" />
                     <button class="sui-btn btn-xlarge btn-danger" type="button" @click="goSearch">搜索</button>
                 </form>
             </div>
@@ -46,30 +46,35 @@
 <script>
 export default {
     name: "headerC",
-    data(){
-        return{
-            keyword:""
+    data() {
+        return {
+            keyword: ""
         }
     },
-    methods:{
-        goSearch(){
+    methods: {
+        goSearch() {
             // 编程式导航路由
             // 此处多次点击会报错
             // 传递params参数和query参数  (params需要在路由path中接收)
             // this.$router.push("/search/"+this.keyword+"?k="+this.keyword.toUpperCase());
 
             // 对象传参方式
-            this.$router.push({
-                // 需在路由中配置name属性，使用path不能和params一起使用
-                name:"search",
-                params:{keyword:this.keyword},
+            let location = {};
+            if (this.$route.query) {
+                location = {
+                    // 需在路由中配置name属性，使用path不能和params一起使用
+                    name: "search",
+                    params: { keyword: this.keyword || undefined },
+                    // params传递空字符串是 使用undefined 避免url错误
+                    // params:{keyword:""||undefined},
+                    // query:{
+                    //     k:this.keyword.toUpperCase()
+                    // }
+                };
+                location.query = this.$route.query;
+            }
+            this.$router.push(location)
 
-                // params传递空字符串是 使用undefined 避免url错误
-                // params:{keyword:""||undefined},
-                query:{
-                    k:this.keyword.toUpperCase()
-                }
-            })
         }
     }
 }

@@ -19,6 +19,11 @@ export default {
 data(){
   return {
   }
+},
+mounted(){
+  // 为了避免每次加载typeNav组件都会发起ajax请求，把这个请求放在Aoo.vue中
+  // 通知Vuex发起请求,获取数据
+  this.$store.dispatch("categoryList");
 }
 }
 </script>
